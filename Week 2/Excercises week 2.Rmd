@@ -1,0 +1,79 @@
+---
+title: "Excercises week 2"
+author: "Jakob"
+date: "2/9/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+3.1 
+Weighted averages: A survey is conducted in a certain city regarding support for increased
+property taxes to fund schools. In this survey, higher taxes are supported by 50% of respondents
+aged 18–29, 60% of respondents aged 30–44, 40% of respondents aged 45–64, and 30% of
+respondents aged 65 and up. Assume there is no nonresponse.
+Suppose the sample includes 200 respondents aged 18–29, 250 aged 30–44, 300 aged 45–64,
+and 250 aged 65+. Use the weighted average formula to compute the proportion of respondents
+in the sample who support higher taxes.
+
+```{r}
+(0.5*200+0.60*250+0.4*300+0.3*250)/1000
+```
+3.3 
+Probability distributions: Using R, graph probability densities for the normal distribution,
+plotting several different curves corresponding to different choices of mean and standard
+deviation parameters.
+
+```{r}
+x = seq(from=-3,to=3, length.out=1000)
+y1=dnorm(x, mean=0, sd=1)
+y2=dnorm(x, mean=2, sd=0.2)
+plot(x,y1)
+plot(x,y2)
+```
+
+3.4
+Probability distributions: Using a bar plot in R, graph the Poisson distribution with parameter
+
+```{r}
+x = 1:20
+y=dpois(x, lambda = 3.5)
+plot(x,y)
+tibble(x=x,y=y) %>% 
+  ggplot(aes(x,y)) +
+  geom_col()
+```
+3.5 
+Probability distributions: Using a bar plot in R, graph the binomial distribution with n = 20 and p= 0.3
+
+```{r}
+x = 1:20
+y=dbinom(x, size = 20, prob = 0.3 )
+plot(x,y)
+tibble(x=x,y=y) %>% 
+  ggplot(aes(x,y)) +
+  geom_col()
+```
+3.6 
+Linear transformations: A test is graded from 0 to 50, with an average score of 35 and a standard
+deviation of 10. For comparison to other tests, it would be convenient to rescale to a mean of
+100 and standard deviation of 15.
+(a) Labeling the original test scores as x and the desired rescaled test score as y, come up with a
+linear transformation, that is, values of 0 and 1 so that the rescaled scores ~ = 0   1G have a
+mean of 100 and a standard deviation of 15.
+(b) What is the range of possible values of this rescaled score ~?
+(c) Plot the line showing ~ vs. G.
+
+```{r}
+x=rnorm(100000000, mean = 35, sd=10)
+y=65+x*1.5
+plot(x,y)
+hist(y)
+```
+
