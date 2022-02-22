@@ -267,3 +267,39 @@ __Following Exercises in Chapter 5:__
 5.1, 5.3, 5.4, 5.5 5.8, 5.9, 5.11, 5.12, 5.13
 
 5.2 (semi-hard), 5.6 (hard)
+
+
+## 5.1
+```{r}
+basketball <- function(probability){
+  number_of_shots <- 0
+  number_of_hits <- 0
+  last = T
+  current = T
+  while(last || current){
+    last=current
+    current=sample(c(T,F),size=1,prob=c(probability,1-probability))
+    number_of_shots = number_of_shots+1
+    if(current){
+      number_of_hits=number_of_hits+1
+    }
+  }
+  return(list(number_of_shots=number_of_shots,number_of_hits=number_of_hits))
+}
+
+basketball(0.6)
+
+shot=basketball(0.6)
+vector_d_hits <- c(1:1000) 
+vector_d_shots <- c(1:1000)
+
+for(i in 1:length(vector_d)){
+  shot=basketball(0.6)
+  vector_d_hits[i]=shot$number_of_hits
+  vector_d_shots[i]=shot$number_of_shots
+}
+
+plot(vector_d_hits,vector_d_shots)
+hist(vector_d_hits)
+```
+
